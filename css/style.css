@@ -1,0 +1,41 @@
+body {
+
+	background-image:url("http://i58.tinypic.com/119arf7.jpg");
+	background-size: 1366px 760px;
+	background-repeat:no-repeat;
+
+}
+#menuEsquerda {
+	margin-top:1.5%;
+	margin-left:2%;
+	height:95%;
+	background-color:#DADADA;
+	border-radius:25px;
+}
+
+#corpo {
+	height:99.9%;
+	width:73%;
+
+}
+
+#topoMenuDireita {
+	height:30%;
+}
+
+#conteudoMenuDireita {
+	height:70%;
+}
+
+#avatar {
+	height:20%;
+	margin-top:5%;
+}
+#conteudo {
+	margin-top:2.4%;
+	margin-left:2%;
+	height:95%;
+	background-color:rgba(200,200,200,0.8);
+	border-radius:25px;
+	border: solid white 2px;
+}
