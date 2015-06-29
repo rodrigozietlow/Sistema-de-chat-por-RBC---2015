@@ -10,6 +10,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/octicons/octicons.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	</head>
 	
 	<body>
@@ -30,9 +31,6 @@
 						<div class="col-lg-offset-2 col-lg-8" id="info">
 						
 						</div>
-						<div class="col-lg-2" id="botaoEsconde">
-							<button class="btn btn-grey btn-lg" id="cliqueme"><span id="spannn" class="glyphicon glyphicon-chevron-right"></span></button>
-						</div>
 					</div>
 					
 					<div class="row">
@@ -41,7 +39,9 @@
 						</div>
 					</div>
 				</div>
-				
+				<div id="botaoEsconde">
+					<button class="btn btn-grey btn-lg" id="cliqueme"><span id="spannn" class="glyphicon glyphicon-chevron-right"></span></button>
+				</div>
 				<div class="col-lg-10" id="wrapperConteudo">
 				
 				
@@ -57,20 +57,20 @@
 $(document).ready(function() {
 	cliques = 0;
     $('#cliqueme').click(function() {
-         $('#menuEsquerda').toggle("slide");
+       
 		 if(cliques % 2 == 0){
+			 $('#menuEsquerda').toggle("slideleft");
 			 $('#spannn').removeClass();
-			 $('#spannn').addClass("glyphicon glyphicon-triangle-left");
+			 $('#spannn').addClass("glyphicon glyphicon-chevron-left");
 			 
 		 }else{
 			 $('#spannn').removeClass();
 			
-			 $('#spannn').addClass("glyphicon glyphicon-triangle-right");
+			 $('#spannn').addClass("glyphicon glyphicon-chevron-right");
 		 }
 		 cliques++;
     });
 });
 </script>
-
 
 
