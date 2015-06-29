@@ -53,6 +53,24 @@
 	
 	</body>
 </html>
+<script type="text/javascript">
+$(document).ready(function() {
+	cliques = 0;
+    $('#cliqueme').click(function() {
+         $('#menuEsquerda').toggle("slide");
+		 if(cliques % 2 == 0){
+			 $('#spannn').removeClass();
+			 $('#spannn').addClass("glyphicon glyphicon-triangle-left");
+			 
+		 }else{
+			 $('#spannn').removeClass();
+			
+			 $('#spannn').addClass("glyphicon glyphicon-triangle-right");
+		 }
+		 cliques++;
+    });
+});
+</script>
 
 
 
