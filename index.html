@@ -11,6 +11,17 @@
 	<script src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/octicons/octicons.css">
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$('#textarea').bind('keypress', function(e) {
+				if(e.keyCode==32){
+					var valor = $("#textarea").val();
+				}
+			});
+		});
+	</script>
+	
 	</head>
 	
 	<body>
