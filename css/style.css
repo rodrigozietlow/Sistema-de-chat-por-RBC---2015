@@ -25,6 +25,11 @@ body {
 #nav-menu`{
 	display:inline;
 	}
+#cima-chat{
+	overflow:scroll; 
+	overflow-x:hidden;
+	background-color:#F0F0F0;
+}
 .conversa-right{
 	background-color:#E8E8E8;
 	opacity:0.5;
