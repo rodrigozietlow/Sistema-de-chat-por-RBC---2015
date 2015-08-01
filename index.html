@@ -80,7 +80,7 @@
 
 				</div>
 			</div>
-		<textarea id="textarea"></textarea>
+		<textarea id="textarea" style="width:100%"></textarea>
 	</body>
 </html>
 <script type="text/javascript">
@@ -90,13 +90,40 @@ $(document).ready(function() {
 			//salvar primeiro
 			var valor = $("#textarea").val();
 			var valorQuebrado = valor.split(" ");
-			if(valorQuebrado.lenght >= 2){
-			
+			var tam = valorQuebrado.length;
+			console.log(tam);
+			if(valorQuebrado.length >= 4){
+				var nivel1 = valorQuebrado[valorQuebrado.length-2],
+					nivel2 = valorQuebrado[valorQuebrado.length-3],
+					nivel3 = valorQuebrado[valorQuebrado.length-4],
+					proxima = valorQuebrado[valorQuebrado.length-1]
+				
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
 			}
-			else if(valorQuebrado.lenght == 1){
-			
-			}else if(valorQuebrado.lenght == 0){
-			
+			else if(valorQuebrado.length == 3){
+				var proxima = valorQuebrado[valorQuebrado.length-1],
+					nivel1 = valorQuebrado[valorQuebrado.length-2],
+					nivel2 = valorQuebrado[valorQuebrado.length-3]
+					
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
+			}
+			else if(valorQuebrado.length == 2){
+				var proxima = valorQuebrado[valorQuebrado.length-1],
+					nivel1 = valorQuebrado[valorQuebrado.length-2]
+										
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:1, nivel1:nivel1, proxima:proxima},
+					function(resposta){
+						//alert(resposta);
+					}
+				);
 			}
 			
 			
