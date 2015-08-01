@@ -25,3 +25,16 @@ body {
 #nav-menu`{
 	display:inline;
 	}
+.conversa-right{
+	background-color:#E8E8E8;
+	opacity:0.5;
+	float:right;
+}
+.conversa-left{
+	background-color:#E8E8E8;
+	opacity:0.5;
+	float:left;
+}
+.clear-both{
+	clear:both;
+}
