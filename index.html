@@ -13,13 +13,14 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	
 	<script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 			$('#textarea').bind('keypress', function(e) {
 				if(e.keyCode==32){
 					var valor = $("#textarea").val();
+					alert(valor);
 				}
 			});
-		});
+		});*/
 	</script>
 	
 	</head>
@@ -79,11 +80,28 @@
 
 				</div>
 			</div>
-	
+		<textarea id="textarea"></textarea>
 	</body>
 </html>
 <script type="text/javascript">
 $(document).ready(function() {
+	$('#textarea').bind('keypress', function(e) {
+		if(e.keyCode==32){
+			//salvar primeiro
+			var valor = $("#textarea").val();
+			var valorQuebrado = valor.split(" ");
+			if(valorQuebrado.lenght >= 2){
+			
+			}
+			else if(valorQuebrado.lenght == 1){
+			
+			}else if(valorQuebrado.lenght == 0){
+			
+			}
+			
+			
+		}
+	});
 	var cont = 0;
 	$("#nav-opcoes").slideUp(10);
 	$('#menu').click(function() {
