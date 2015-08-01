@@ -3,12 +3,19 @@ body {
 #avatar {
 	/*border: solid green;*/
 	overflow:hidden;
-	height:12%;
+	height:10%;
 }
 #avatar img{
-	height:100%;
+	height:85%;
 	width:auto;
 	float:left;
+	margin-right: 1%;
+	
+}
+#avatar img:hover{
+	background-color: rgba(240, 240, 240, 0.5);
+	height:100%;
+	margin-right:0.2%;
 }
 #icon-click{
 }
