@@ -2,14 +2,13 @@ body {
 }
 #avatar {
 	/*border: solid green;*/
-	overflow:scroll;
-	display:table;
+	overflow:hidden;
 	height:12%;
 }
 #avatar img{
 	height:100%;
 	width:auto;
-	display:table-cell;
+	float:left;
 }
 #icon-click{
 }
