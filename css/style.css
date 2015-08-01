@@ -2,17 +2,19 @@ body {
 }
 #avatar {
 	/*border: solid green;*/
-	height:30%;
+	overflow:scroll;
+	display:table;
+	height:12%;
 }
 #avatar img{
-	height:4em;
+	height:100%;
 	width:auto;
+	display:table-cell;
 }
 #icon-click{
 }
 #menu-topo{
 	background-color: #E8E8E8 ;
-	height:5em;
 	}
 #nav-menu`{
 	display:inline;
