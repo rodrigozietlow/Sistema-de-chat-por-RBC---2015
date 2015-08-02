@@ -17,9 +17,18 @@ $conexao = new MySQL();
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	
+	<script>
+		/*$(document).ready(function(){
+			$('#textarea').bind('keypress', function(e) {
+				if(e.keyCode==32){
+					var valor = $("#textarea").val();
+					alert(valor);
+				}
+			});
+		});*/
+	</script>
 	
 	</head>
 	
@@ -71,9 +80,9 @@ $conexao = new MySQL();
 												echo "<img class='img' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
 											}
 										}
+									}
 								}
-								}
-								?>
+								?>							
 							</div>
 						</div>
 					</div>
@@ -82,6 +91,7 @@ $conexao = new MySQL();
 			<div class="row" id="chat">
 				<div class="col-lg-12" id="cima-chat">
 					
+
 					<div id="main">
 						<div class="top left"></div>
 						<div class="top right"></div>
@@ -89,12 +99,13 @@ $conexao = new MySQL();
 						<div class="bottom right"></div>
 					</div>
 
+
 				</div>
 			</div>
 			<div class="row" id="texto-area">
 				<div class="col-lg-12" id="baixo-chat">
 					<div class="form-group">
-						<textarea id="textarea" class="form-control" style="width:100%;margin:1em" ></textarea>
+						<textarea id="textarea" class="form-control" style="width:98%;" ></textarea><button class="btn btn-default" style="float:right;margin-right:2em;">SEND</button>
 					</div>
 				</div>
 			</div>
@@ -147,6 +158,20 @@ $(document).ready(function() {
 			
 		}
 	});
+	
+	$(".img").click(function(){
+		var idOutro = $(this).attr("data-id"),
+			idUsuario = '<?= $_SESSION['id']?>';
+		//console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
+		$.post(
+			"ajax/ajaxGetConversa.php",
+			{idOutro:idOutro, idUsuario:idUsuario},
+			function(resposta){
+				$("#cima-chat").html(resposta);
+			});
+		
+	});
+	
 	var cont = 0;
 	$("#nav-opcoes").slideUp(10);
 	$('#menu').click(function() {
