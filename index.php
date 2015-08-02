@@ -138,7 +138,7 @@ $(document).ready(function() {
 				}
 			);
 		}
-	, 5000);
+	, 2000);
 	
 	
 	$('#textarea').bind('keyup', function(e) {
