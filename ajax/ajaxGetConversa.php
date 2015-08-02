@@ -1,4 +1,4 @@
-<?php
+<meta charset="ISO-8859-1"><?php
 require_once($_SERVER['DOCUMENT_ROOT']."/Sistema-de-chat-por-RBC---2015/MySQL.class.php");
 $idUsuario = $_POST['idUsuario'];
 $idOutro = $_POST['idOutro'];

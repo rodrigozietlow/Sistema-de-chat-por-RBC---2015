@@ -10,7 +10,7 @@ $conexao = new MySQL();
 	<head>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-
+	<meta charset="ISO-8859-1">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -105,6 +105,7 @@ $conexao = new MySQL();
 			<div class="row" id="texto-area">
 				<div class="col-lg-12" id="baixo-chat">
 					<div class="form-group">
+						<input type="hidden" name="idCaraConversa" id="escondido">
 						<textarea id="textarea" class="form-control" style="width:98%;" ></textarea><button class="btn btn-default" style="float:right;margin-right:2em;">SEND</button>
 					</div>
 				</div>
@@ -114,37 +115,37 @@ $conexao = new MySQL();
 </html>
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#textarea').bind('keypress', function(e) {
+	$('#textarea').bind('keyup', function(e) {
 		if(e.keyCode==32){
 			//salvar primeiro
 			var valor = $("#textarea").val();
 			var valorQuebrado = valor.split(" ");
 			var tam = valorQuebrado.length;
-			console.log(tam);
-			if(valorQuebrado.length >= 4){
-				var nivel1 = valorQuebrado[valorQuebrado.length-2],
-					nivel2 = valorQuebrado[valorQuebrado.length-3],
-					nivel3 = valorQuebrado[valorQuebrado.length-4],
-					proxima = valorQuebrado[valorQuebrado.length-1]
+			console.log(valorQuebrado);
+			if(valorQuebrado.length >= 5){
+				var nivel1 = valorQuebrado[valorQuebrado.length-3],//coloca com um espaço a mais por motivos de gamb
+					nivel2 = valorQuebrado[valorQuebrado.length-4],
+					nivel3 = valorQuebrado[valorQuebrado.length-5],
+					proxima = valorQuebrado[valorQuebrado.length-2]
 				
 				$.post(
 					"ajax/ajaxSalvaCasos.php",
 					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
 				);
 			}
-			else if(valorQuebrado.length == 3){
-				var proxima = valorQuebrado[valorQuebrado.length-1],
-					nivel1 = valorQuebrado[valorQuebrado.length-2],
-					nivel2 = valorQuebrado[valorQuebrado.length-3]
+			else if(valorQuebrado.length == 4){
+				var proxima = valorQuebrado[valorQuebrado.length-2],
+					nivel1 = valorQuebrado[valorQuebrado.length-3],
+					nivel2 = valorQuebrado[valorQuebrado.length-4]
 					
 				$.post(
 					"ajax/ajaxSalvaCasos.php",
 					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
 				);
 			}
-			else if(valorQuebrado.length == 2){
-				var proxima = valorQuebrado[valorQuebrado.length-1],
-					nivel1 = valorQuebrado[valorQuebrado.length-2]
+			else if(valorQuebrado.length == 3){
+				var proxima = valorQuebrado[valorQuebrado.length-2],
+					nivel1 = valorQuebrado[valorQuebrado.length-3]
 										
 				$.post(
 					"ajax/ajaxSalvaCasos.php",
@@ -156,12 +157,26 @@ $(document).ready(function() {
 			}
 			
 			
+		}else if(e.keyCode==13){
+			var texto = $("#textarea").val();
+			$("#textarea").val("");
+			var idUsuario = '<?= $_SESSION['id'] ?>',
+				idOutro = $("#escondido").val();
+			//console.log(idUsuario+" | "+idOutro);
+			$.post(
+				"ajax/ajaxSalvaMensagem.php",
+				{mensagem:texto, idUsuario:idUsuario, idOutro:idOutro},
+				function(resposta){
+					$("#cima-chat").html($("#cima-chat").html()+resposta);
+				}
+			);
 		}
 	});
 	
 	$(".img").click(function(){
 		var idOutro = $(this).attr("data-id"),
 			idUsuario = '<?= $_SESSION['id']?>';
+		$("#escondido").val(idOutro);
 		//console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
 		$.post(
 			"ajax/ajaxGetConversa.php",
