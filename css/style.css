@@ -29,19 +29,28 @@ body {
 	display:inline;
 	}
 #cima-chat{
-	overflow:scroll; 
+	max-height:75%;
+	overflow:auto; 
 	overflow-x:hidden;
 	background-color:#F0F0F0;
 }
-.conversa-right{
-	background-color:#E8E8E8;
+.conversa{
+	margin-bottom:5px;
+	margin-top:5px;
+	padding:5px;
+	width:auto;
+	max-width:75%;
+	word-wrap: break-word;
+	background-color:#F0F0F0;
 	opacity:0.5;
+	border:3px solid black;
+	}
+.conversa-right{
 	float:right;
 }
 .conversa-left{
-	background-color:#E8E8E8;
-	opacity:0.5;
 	float:left;
+	
 }
 .clear-both{
 	clear:both;
