@@ -58,7 +58,7 @@ $conexao = new MySQL();
 								<?php
 								$contadorFotos = 1;
 								$pessoas = "";
-								$queryConv = "SELECT nome, u.id FROM conversa c, usuarios u WHERE (u.id=c.idReceptor OR u.id=c.idEnviador) AND u.id<>".$_SESSION['id']." ORDER BY data DESC LIMIT 18";
+								$queryConv = "SELECT DISTINCT nome, u.id FROM conversa c, usuarios u WHERE (u.id=c.idReceptor OR u.id=c.idEnviador) AND u.id<>".$_SESSION['id']." ORDER BY data DESC LIMIT 18";
 								$resultado = $conexao->consulta($queryConv);
 								if(count($resultado)>0){
 									foreach($resultado as $cara){
@@ -159,6 +159,42 @@ $(document).ready(function() {
 			
 		}else if(e.keyCode==13){
 			var texto = $("#textarea").val();
+			var valorQuebrado = valor.split(" ");
+			var tam = valorQuebrado.length;
+			console.log(valorQuebrado);
+			if(valorQuebrado.length >= 5){
+				var nivel1 = valorQuebrado[valorQuebrado.length-3],//coloca com um espaço a mais por motivos de gamb
+					nivel2 = valorQuebrado[valorQuebrado.length-4],
+					nivel3 = valorQuebrado[valorQuebrado.length-5],
+					proxima = valorQuebrado[valorQuebrado.length-2]
+				
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
+			}
+			else if(valorQuebrado.length == 4){
+				var proxima = valorQuebrado[valorQuebrado.length-2],
+					nivel1 = valorQuebrado[valorQuebrado.length-3],
+					nivel2 = valorQuebrado[valorQuebrado.length-4]
+					
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
+			}
+			else if(valorQuebrado.length == 3){
+				var proxima = valorQuebrado[valorQuebrado.length-2],
+					nivel1 = valorQuebrado[valorQuebrado.length-3]
+										
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:1, nivel1:nivel1, proxima:proxima},
+					function(resposta){
+						//alert(resposta);
+					}
+				);
+			}
 			$("#textarea").val("");
 			var idUsuario = '<?= $_SESSION['id'] ?>',
 				idOutro = $("#escondido").val();
@@ -167,7 +203,7 @@ $(document).ready(function() {
 				"ajax/ajaxSalvaMensagem.php",
 				{mensagem:texto, idUsuario:idUsuario, idOutro:idOutro},
 				function(resposta){
-					$("#cima-chat").html($("#cima-chat").html()+resposta);
+					$("#cima-chat").append(resposta);
 				}
 			);
 		}
