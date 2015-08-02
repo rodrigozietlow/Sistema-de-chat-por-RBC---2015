@@ -88,18 +88,18 @@ $conexao = new MySQL();
 										}
 									}
 								}
-								?>							
+								?>	
+								
+								
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row" id="chat">
-				<div class="col-lg-12" id="cima-chat">
+				<div class="col-lg-12" id="cima-chat">	
+					<!-- Aqui tem opções padrões !-->
 					
-
-					
-
 				</div>
 			</div>
 			<div class="row" id="texto-area">

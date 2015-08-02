@@ -1,30 +1,25 @@
 body {
 }
 .img {
-	border-radius: 14px;
+	border-radius: 100%;
 }
 .img:hover{
 	cursor:pointer;
 }
 #avatar {
-	/*border: solid green;*/
 	overflow:hidden;
-	height:9%;
+	height:10%;
+	margin-bottom:10px;
+	margin-top: -5px;
+	padding-left:25px;
+	border-radius: 20px;
 }
 #avatar img{
 	height:85%;
 	width:auto;
 	float:left;
 	margin-right: 1%;
-	
-}
-/*
-#avatar img:hover{
-	background-color: rgba(240, 240, 240, 0);
-	height:95%;
-	margin-right:0.2%;
-}*/
-#icon-click{
+	margin-top: 0.35%;
 }
 #menu-topo{
 	background-color: #E8E8E8 ;
@@ -33,7 +28,7 @@ body {
 	display:inline;
 	}
 #cima-chat{
-	height:76.9%;
+	height:75%;
 	overflow:auto; 
 	overflow-x:hidden;
 	padding-top:10px;
