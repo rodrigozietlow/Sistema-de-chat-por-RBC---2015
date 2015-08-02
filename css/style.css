@@ -34,56 +34,36 @@ body {
 	overflow-x:hidden;
 	background-color:#F0F0F0;
 	min-height: 10%;
+	background-image: url("../img/conversa-img.jpg");
+	
 }
 .conversa{
-	color:black;
-	margin-bottom:5px;
-	margin-top:5px;
-	padding:5px;
-	width:auto;
+	margin-left:30px;
+    margin-top:20px;
+    position:relative;
+    color:#3b3d3c;
+    border:1px solid #666;
+    background: -moz-linear-gradient( top , #eee 0%,#bbb 100%);
+    background: -webkit-linear-gradient( top , #eee 0%,#bbb 100%);
+	text-decoration:none;
+    text-shadow:0 1px 0 #fff;
+    font-weight:bold;
+    padding:10px 10px;
+    font-size:14px;
+    border-radius:8px 8px 8px 8px;
 	max-width:75%;
-	word-wrap: break-word;
-	background-color:#F0F0F0;
-	opacity:0.5;
-	border:3px solid black;
-	border-radius: 5px;
+	word-wrap:break-word;
 	
-	}
-
+}
 .conversa-right{
 	float:right;
-	background-color: rgba(0, 250, 75, 0.2);
-	border-bottom-right-radius:25px;	
-
-
+	border-right:0;
 }
 .conversa-left{
-	float:left;
-	background-color: rgba(250, 250, 0, 0.2);
-	border-bottom-left-radius:25px;	
-	
-
+    float:left;
+	border-left:0;
 }
 .clear-both{
 	clear:both;
 }
-#main {
-    margin: 40px;
-    height: 100px;
-    background-color: #004C80;
-    position: relative;
-    overflow: hidden;
-}
 
-#main div {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    background-color: #FFF;
-}
-
-.top { top: -10px; }
-.bottom { bottom: -10px; }
-.left { left: -10px; }
-.right { right: -10px; }
