@@ -15,7 +15,7 @@ $query2 = "SELECT * FROM conversa WHERE id=$id";
 $resultado = $conexao->consulta($query2);
 if(count($resultado)>0){
 	$resultado = $resultado[0];
-	echo "<div class='conversa conversa-right'>".utf8_encode($resultado['mensagem'])."</div>";
+	echo "<div class='conversa conversa-right hvr-bubble-float-right'>".utf8_encode($resultado['mensagem'])."</div>";
 	echo "<div class='clear-both'></div>";
 }
 ?>

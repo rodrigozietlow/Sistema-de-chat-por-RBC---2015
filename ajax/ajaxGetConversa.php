@@ -9,10 +9,14 @@ $conexao = new MySQL();
 
 $resultado = $conexao->consulta($query);
 
-if(count($resultado)){
+if(count($resultado)>0){
 	foreach($resultado as $mensagem){
 		if($mensagem['idReceptor']==$idOutro){// se o outro cara recebeu a msg, eu que enviei
-			echo "<div class='conversa conversa-right'>".$mensagem['mensagem']."</div>";
+			
+			echo "<div class='conversa conversa-right hvr-bubble-float-right'>".$mensagem['mensagem']."</div>";
+			echo "<div class='clear-both'></div>";
+		}else{
+			echo "<div class='conversa conversa-left hvr-bubble-float-left'>".$mensagem['mensagem']."</div>";
 			echo "<div class='clear-both'></div>";
 		}
 	}

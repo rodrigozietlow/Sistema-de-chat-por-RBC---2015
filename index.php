@@ -9,15 +9,17 @@ $conexao = new MySQL();
 <html>
 	<head>
 	<!-- Latest compiled and minified CSS -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<meta charset="ISO-8859-1">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	
 	
 	<script>
 		/*$(document).ready(function(){
@@ -42,7 +44,7 @@ $conexao = new MySQL();
 						
 						<div class="col-lg-1" id="nav-menu">
 							<div id="icon-click">
-								<button class="btn btn-default btn-lg active" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
+								<button class="btn btn-default btn-lg" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
 							</div>
 							
 							<div id="nav-opcoes" style="width:40%;">
@@ -65,7 +67,7 @@ $conexao = new MySQL();
 										$contadorFotos++;
 										$pessoas .= $cara['id'].",";
 										$id = $cara['id'];
-										echo "<img class='img' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
+										echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
 									}
 								}
 								if(strlen($pessoas)>0){
@@ -81,7 +83,7 @@ $conexao = new MySQL();
 											$id = $cara['id'];
 											if($id!=$_SESSION['id']){//não é eu mesmo!
 												$contadorFotos++;
-												echo "<img class='img' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
+												echo "<img class='img hvr-buzz-out' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
 											}
 										}
 									}
@@ -96,13 +98,7 @@ $conexao = new MySQL();
 				<div class="col-lg-12" id="cima-chat">
 					
 
-					<div id="main">
-						<div class="top left"></div>
-						<div class="top right"></div>
-						<div class="bottom left"></div>
-						<div class="bottom right"></div>
-					</div>
-
+					
 
 				</div>
 			</div>
@@ -110,7 +106,10 @@ $conexao = new MySQL();
 				<div class="col-lg-12" id="baixo-chat">
 					<div class="form-group">
 						<input type="hidden" name="idCaraConversa" id="escondido">
-						<textarea id="textarea" class="form-control" style="width:98%;" ></textarea><button class="btn btn-default" style="float:right;margin-right:2em;">SEND</button>
+						<textarea id="textarea" placeholder="Digite sua mensagem aqui!" class="form-control"></textarea>
+						<div class='bloco'>
+							<a class="hvr-wobble-horizontal" id="enviar"><span class="glyphicon glyphicon-arrow-right glyphicon-lg" ></span></a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -119,6 +118,11 @@ $conexao = new MySQL();
 </html>
 <script type="text/javascript">
 $(document).ready(function() {
+	$(function () {//inicializar as tooltips - bootstrap
+		$('[data-toggle="tooltip"]').tooltip()
+	});
+	
+	
 	$('#textarea').bind('keyup', function(e) {
 		if(e.keyCode==32){
 			//salvar primeiro
@@ -130,28 +134,35 @@ $(document).ready(function() {
 			
 			
 		else if(e.keyCode==13){//Quando d� enter e salva a mensagem
-			var texto = $("#textarea").val();
+			$("#enviar").trigger("click");
+		}
+	});
+	
+	$("#enviar").click(function(){
+		var texto = $("#textarea").val();
 			quebraESalva(texto);
 			$("#textarea").val("");
 			var idUsuario = '<?= $_SESSION['id'] ?>',
 				idOutro = $("#escondido").val();
 			//console.log(idUsuario+" | "+idOutro);
-			$.post(
-				"ajax/ajaxSalvaMensagem.php",
-				{mensagem:texto, idUsuario:idUsuario, idOutro:idOutro},
-				function(resposta){
-					$("#cima-chat").append(resposta);
-					updateScroll();
-				}
-			);
-		}
+			if($.trim(texto).length>0){
+				$.post(
+					"ajax/ajaxSalvaMensagem.php",
+					{mensagem:texto, idUsuario:idUsuario, idOutro:idOutro},
+					function(resposta){
+						$("#cima-chat").append(resposta);
+						updateScroll();
+					}
+				);
+			}
 	});
+	
 	
 	$(".img").click(function(){
 		var idOutro = $(this).attr("data-id"),
 			idUsuario = '<?= $_SESSION['id']?>';
 		$("#escondido").val(idOutro);
-		//console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
+		console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
 		$.post(
 			"ajax/ajaxGetConversa.php",
 			{idOutro:idOutro, idUsuario:idUsuario},
