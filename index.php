@@ -68,7 +68,11 @@ $conexao = new MySQL();
 										echo "<img class='img' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
 									}
 								}
-								$pessoas = substr($pessoas, 0, -1);
+								if(strlen($pessoas)>0){
+									$pessoas = substr($pessoas, 0, -1);
+								}else{
+									$pessoas = "''";
+								}
 								if($contadorFotos<=18){
 									$queryUsu = "SELECT nome, id FROM usuarios WHERE id NOT IN($pessoas) ORDER BY id DESC LIMIT 18";
 									$resultado = $conexao->consulta($queryUsu);
@@ -119,82 +123,15 @@ $(document).ready(function() {
 		if(e.keyCode==32){
 			//salvar primeiro
 			var valor = $("#textarea").val();
-			var valorQuebrado = valor.split(" ");
-			var tam = valorQuebrado.length;
-			console.log(valorQuebrado);
-			if(valorQuebrado.length >= 5){
-				var nivel1 = valorQuebrado[valorQuebrado.length-3],//coloca com um espaço a mais por motivos de gamb
-					nivel2 = valorQuebrado[valorQuebrado.length-4],
-					nivel3 = valorQuebrado[valorQuebrado.length-5],
-					proxima = valorQuebrado[valorQuebrado.length-2]
-				
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 4){
-				var proxima = valorQuebrado[valorQuebrado.length-2],
-					nivel1 = valorQuebrado[valorQuebrado.length-3],
-					nivel2 = valorQuebrado[valorQuebrado.length-4]
-					
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 3){
-				var proxima = valorQuebrado[valorQuebrado.length-2],
-					nivel1 = valorQuebrado[valorQuebrado.length-3]
-										
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:1, nivel1:nivel1, proxima:proxima},
-					function(resposta){
-						//alert(resposta);
-					}
-				);
-			}
+			quebraESalva(valor);
+		}
+		
+		//=====================================================================//
 			
 			
-		}else if(e.keyCode==13){
+		else if(e.keyCode==13){//Quando dá enter e salva a mensagem
 			var texto = $("#textarea").val();
-			var valorQuebrado = valor.split(" ");
-			var tam = valorQuebrado.length;
-			console.log(valorQuebrado);
-			if(valorQuebrado.length >= 5){
-				var nivel1 = valorQuebrado[valorQuebrado.length-3],//coloca com um espaço a mais por motivos de gamb
-					nivel2 = valorQuebrado[valorQuebrado.length-4],
-					nivel3 = valorQuebrado[valorQuebrado.length-5],
-					proxima = valorQuebrado[valorQuebrado.length-2]
-				
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 4){
-				var proxima = valorQuebrado[valorQuebrado.length-2],
-					nivel1 = valorQuebrado[valorQuebrado.length-3],
-					nivel2 = valorQuebrado[valorQuebrado.length-4]
-					
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 3){
-				var proxima = valorQuebrado[valorQuebrado.length-2],
-					nivel1 = valorQuebrado[valorQuebrado.length-3]
-										
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:1, nivel1:nivel1, proxima:proxima},
-					function(resposta){
-						//alert(resposta);
-					}
-				);
-			}
+			quebraESalva(texto);
 			$("#textarea").val("");
 			var idUsuario = '<?= $_SESSION['id'] ?>',
 				idOutro = $("#escondido").val();
@@ -204,6 +141,7 @@ $(document).ready(function() {
 				{mensagem:texto, idUsuario:idUsuario, idOutro:idOutro},
 				function(resposta){
 					$("#cima-chat").append(resposta);
+					updateScroll();
 				}
 			);
 		}
@@ -219,8 +157,8 @@ $(document).ready(function() {
 			{idOutro:idOutro, idUsuario:idUsuario},
 			function(resposta){
 				$("#cima-chat").html(resposta);
+				updateScroll();
 			});
-		
 	});
 	
 	var cont = 0;
@@ -234,6 +172,52 @@ $(document).ready(function() {
 		cont++
 	});
 	
+
+	function updateScroll(){	
+		var element = document.getElementById("cima-chat");
+		element.scrollTop = element.scrollHeight;
+	}
+	
+	function quebraESalva(valor){
+		valor = $.trim(valor);
+		var valorQuebrado = valor.split(" ");
+		var tam = valorQuebrado.length;
+		console.log(valorQuebrado);
+		if(valorQuebrado.length >= 4){
+			var nivel1 = valorQuebrado[valorQuebrado.length-2],
+
+				nivel2 = valorQuebrado[valorQuebrado.length-3],
+				nivel3 = valorQuebrado[valorQuebrado.length-4],
+				proxima = valorQuebrado[valorQuebrado.length-1];
+			
+			$.post(
+				"ajax/ajaxSalvaCasos.php",
+				{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+			);
+		}
+		else if(valorQuebrado.length == 3){
+			var proxima = valorQuebrado[valorQuebrado.length-1],
+				nivel1 = valorQuebrado[valorQuebrado.length-2],
+				nivel2 = valorQuebrado[valorQuebrado.length-3]
+				
+			$.post(
+				"ajax/ajaxSalvaCasos.php",
+				{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+			);
+		}
+		else if(valorQuebrado.length == 2){
+			var proxima = valorQuebrado[valorQuebrado.length-1],
+				nivel1 = valorQuebrado[valorQuebrado.length-2]
+									
+			$.post(
+				"ajax/ajaxSalvaCasos.php",
+				{tipo:1, nivel1:nivel1, proxima:proxima},
+				function(resposta){
+					//alert(resposta);
+				}
+			);
+		}
+	}
 });
 </script>
 
