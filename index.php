@@ -82,9 +82,12 @@ $conexao = new MySQL();
 			<div class="row" id="chat">
 				<div class="col-lg-12" id="cima-chat">
 					
-					<div class="conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa-left">aaa</div>
+					<div id="main">
+						<div class="top left"></div>
+						<div class="top right"></div>
+						<div class="bottom left"></div>
+						<div class="bottom right"></div>
+					</div>
 
 				</div>
 			</div>

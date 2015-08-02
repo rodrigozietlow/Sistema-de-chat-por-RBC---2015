@@ -44,14 +44,37 @@ body {
 	background-color:#F0F0F0;
 	opacity:0.5;
 	border:3px solid black;
+	border-radius: 5px;
+	
 	}
 .conversa-right{
 	float:right;
+	border-bottom-right-radius:25px;	
 }
 .conversa-left{
 	float:left;
-	
+	border-bottom-left-radius:25px;	
 }
 .clear-both{
 	clear:both;
 }
+#main {
+    margin: 40px;
+    height: 100px;
+    background-color: #004C80;
+    position: relative;
+    overflow: hidden;
+}
+
+#main div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #FFF;
+}
+
+.top { top: -10px; }
+.bottom { bottom: -10px; }
+.left { left: -10px; }
+.right { right: -10px; }
