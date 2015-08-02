@@ -83,7 +83,7 @@ $conexao = new MySQL();
 											$id = $cara['id'];
 											if($id!=$_SESSION['id']){//não é eu mesmo!
 												$contadorFotos++;
-												echo "<img class='img hvr-buzz-out' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
+												echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
 											}
 										}
 									}
@@ -122,6 +122,24 @@ $(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
 	});
 	
+	setInterval(
+		function(){
+		
+			var idOutro = $("#escondido").val(),
+				idUsuario = "<?= $_SESSION['id']; ?>";
+			
+			console.log(idOutro);
+			$.post(
+				"ajax/ajaxGetConversa.php",
+				{idOutro:idOutro, idUsuario:idUsuario},
+				function(resposta){
+					$("#cima-chat").html(resposta);
+					updateScroll();
+				}
+			);
+		}
+	, 5000);
+	
 	
 	$('#textarea').bind('keyup', function(e) {
 		if(e.keyCode==32){
@@ -145,6 +163,9 @@ $(document).ready(function() {
 			var idUsuario = '<?= $_SESSION['id'] ?>',
 				idOutro = $("#escondido").val();
 			//console.log(idUsuario+" | "+idOutro);
+			
+			$("#numeroMsgs").val($("#numeroMsgs").val()+1);
+			
 			if($.trim(texto).length>0){
 				$.post(
 					"ajax/ajaxSalvaMensagem.php",
@@ -229,6 +250,7 @@ $(document).ready(function() {
 			);
 		}
 	}
+	
 });
 </script>
 

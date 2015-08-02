@@ -20,6 +20,7 @@ if(count($resultado)>0){
 			echo "<div class='clear-both'></div>";
 		}
 	}
+	echo "<input type='hidden' id='numeroMsgs' value=".count($resultado).">";
 }
 
 ?>
