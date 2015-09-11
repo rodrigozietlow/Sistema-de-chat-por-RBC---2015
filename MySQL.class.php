@@ -5,24 +5,24 @@ include "Configuracao.inc.php";
 class MySQL extends BancoDeDados{
 		
 	public function __construct(){
-		$this->conexao = mysql_connect(HOST, USUARIO, SENHA);
-		mysql_select_db(BANCO,$this->conexao);		
+		$this->conexao = mysqli_connect(HOST, USUARIO, SENHA, BANCO );	
 	}
 	
 	public function __destruct(){
-		mysql_close($this->conexao);
+		mysqli_close($this->conexao);
 	}
 	
 	public function executa($sql){
-		$retornoExecucao = mysql_query($sql,$this->conexao);
+		$retornoExecucao = mysqli_query($this->conexao, $sql);
 		return $retornoExecucao;
 	}
 	
 	public function consulta($select){
-		$query = mysql_query($select,$this->conexao);
+		//echo $select;
+		$query = mysqli_query($this->conexao, $select);
 		$retorno = array();
 		$dados = array();
-		while($retorno = mysql_fetch_array($query)){
+		while($retorno = mysqli_fetch_assoc($query)){
 			$dados[] = $retorno;
 		}
 		return $dados;

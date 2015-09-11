@@ -1,5 +1,6 @@
-<meta charset="ISO-8859-1"><?php
-require_once($_SERVER['DOCUMENT_ROOT']."/Sistema-de-chat-por-RBC---2015/MySQL.class.php");
+<?php
+header('Content-Type: text/html; charset=iso-8859-1');
+require_once($_SERVER['DOCUMENT_ROOT']."/MySQL.class.php");
 $idUsuario = $_POST['idUsuario'];
 $idOutro = $_POST['idOutro'];
 
@@ -13,10 +14,10 @@ if(count($resultado)>0){
 	foreach($resultado as $mensagem){
 		if($mensagem['idReceptor']==$idOutro){// se o outro cara recebeu a msg, eu que enviei
 			
-			echo "<div class='conversa conversa-right hvr-bubble-float-right'>".$mensagem['mensagem']."</div>";
+			echo "<div class='conversa conversa-right hvr-bubble-float-right'>".utf8_decode($mensagem['mensagem'])."</div>";
 			echo "<div class='clear-both'></div>";
 		}else{
-			echo "<div class='conversa conversa-left hvr-bubble-float-left'>".$mensagem['mensagem']."</div>";
+			echo "<div class='conversa conversa-left hvr-bubble-float-left'>".utf8_decode($mensagem['mensagem'])."</div>";
 			echo "<div class='clear-both'></div>";
 		}
 	}

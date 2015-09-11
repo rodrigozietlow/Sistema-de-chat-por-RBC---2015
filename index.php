@@ -1,5 +1,6 @@
 <?php
 session_start();
+header('Content-Type: text/html; charset=iso-8859-1');
 require_once("MySQL.class.php");
 if(!isset($_SESSION['id'])){
 	header("location: login.php");
@@ -63,11 +64,12 @@ $conexao = new MySQL();
 								$queryConv = "SELECT DISTINCT nome, u.id FROM conversa c, usuarios u WHERE (u.id=c.idReceptor OR u.id=c.idEnviador) AND u.id<>".$_SESSION['id']." ORDER BY data DESC LIMIT 18";
 								$resultado = $conexao->consulta($queryConv);
 								if(count($resultado)>0){
+									$idLocao = $resultado[0]['id'];
 									foreach($resultado as $cara){
 										$contadorFotos++;
 										$pessoas .= $cara['id'].",";
 										$id = $cara['id'];
-										echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
+										echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".($cara['nome']).".png'>";
 									}
 								}
 								if(strlen($pessoas)>0){
@@ -79,11 +81,14 @@ $conexao = new MySQL();
 									$queryUsu = "SELECT nome, id FROM usuarios WHERE id NOT IN($pessoas) ORDER BY id DESC LIMIT 18";
 									$resultado = $conexao->consulta($queryUsu);
 									if(count($resultado)>0){
+										if(!isset($idLocao)){
+											$idLocao = $resultado[0]['id'];
+										}
 										foreach($resultado as $cara){
 											$id = $cara['id'];
 											if($id!=$_SESSION['id']){//não é eu mesmo!
 												$contadorFotos++;
-												echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".$cara['nome'].".png'>";
+												echo "<img class='img hvr-buzz-out' data-toggle='tooltip' title='' data-placement='bottom' data-original-title='".$cara['nome']."' data-id=$id src='https://github.com/identicons/".utf8_decode($cara['nome']).".png'>";
 											}
 										}
 									}
@@ -105,10 +110,10 @@ $conexao = new MySQL();
 			<div class="row" id="texto-area">
 				<div class="col-lg-12" id="baixo-chat">
 					<div class="form-group">
-						<input type="hidden" name="idCaraConversa" id="escondido">
+						<input type="hidden" name="idCaraConversa" id="escondido" value="<?=$idLocao?>">
 						<textarea id="textarea" placeholder="Digite sua mensagem aqui!" class="form-control"></textarea>
 						<div class='bloco'>
-							<a class="hvr-wobble-horizontal" id="enviar"><span class="glyphicon glyphicon-arrow-right glyphicon-lg" ></span></a>
+							<a class="hvr-wobble-horizontal" id="enviar"><span class="glyphicon glyphicon-arrow-right glyphicon-lg btn-default btn-style" ></span></a>
 						</div>
 					</div>
 				</div>

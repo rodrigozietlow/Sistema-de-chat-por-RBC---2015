@@ -14,8 +14,9 @@ if(isset($_POST['botao'])){
 		$_SESSION['id'] = $id;
 		header("location: index.php");
 		exit;
+	}else{
+		echo "Login ou senha incorretos";
 	}
-	echo "Login ou senha incorretos";
 }
 
 ?>

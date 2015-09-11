@@ -21,12 +21,11 @@ body {
 	margin-right: 1%;
 	margin-top: 0.35%;
 }
-#menu-topo{
-	background-color: #E8E8E8 ;
+#menu-topo{	background-color:#660066;
 	}
 #nav-menu`{
 	display:inline;
-	}
+	}#texto-area{	background-image:url(../img/img5.jpg);	background-repeat:repeat;	border-radius:10px;	border:10px solid #CCC;}.btn-style{	border-radius: 50px !important;	width:50px !important;}
 #cima-chat{
 	height:75%;
 	overflow:auto; 
@@ -94,7 +93,7 @@ body {
 }
 
 
-
+#chat{	background-image:url(../img/img5.jpg);}
 
 
 

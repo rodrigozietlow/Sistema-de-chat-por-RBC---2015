@@ -1,4 +1,4 @@
-<?php
+<meta charset="ISO-8859-1"><?php
 session_start();
 require_once("../MySQL.class.php");
 $conexao = new MySQL();
@@ -34,4 +34,4 @@ if($contadorFotos<=18){
 	}
 }
 echo $retorno;
-?>	
+?>

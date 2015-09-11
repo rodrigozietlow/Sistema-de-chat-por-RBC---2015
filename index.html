@@ -1,186 +1,186 @@
-<html>
-	<head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/octicons/octicons.css">
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	
-	<script>
-		/*$(document).ready(function(){
-			$('#textarea').bind('keypress', function(e) {
-				if(e.keyCode==32){
-					var valor = $("#textarea").val();
-					alert(valor);
-				}
-			});
-		});*/
-	</script>
-	
-	</head>
-	
-	<body>
-	
-		<div class="container-fluid">
-		
-			<div class="row" id="topo">
-				<div class="col-lg-12" id="menu-topo">
-					<div class="row" id="content-topo" style="margin-top:1em;">
-						
-						<div class="col-lg-1" id="nav-menu">
-							<div id="icon-click">
-								<button class="btn btn-default btn-lg active" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
-							</div>
-							
-							<div id="nav-opcoes" style="width:40%;">
-								<ul class="">
-									<li class="">Perfil</li>
-									<li class="">Conversas</li>
-									<li class="">Sair</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-11">
-							<div id="avatar">
-								
-									<img class="img" src="img/icon-1.png">      
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">
-									<img class="img" src="img/icon-1.png">								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row" id="chat">
-				<div class="col-lg-12" id="cima-chat">
-					
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaa    aaa aaaassdfaafsdghsgfjkhgfdkjahsgdfjkhagdfkjhagdfkjahffgkasadkhfasdfhagdsfkhjasdgfkadjgfasdkfjghasdfkjasdhgfkadfhgasdkghasdfkjasdhgfkdhgfaksdjfhgadksfhj</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-right">aaa</div>
-					<div class="clear-both"></div>
-					<div class="conversa conversa-left">aaa</div>
-					<div class="clear-both"></div>
-					
-
-				</div>
-			</div>
-			<div class="row" id="texto-area">
-				<div class="col-lg-12" id="baixo-chat">
-					<div class="form-group">
-						<textarea id="textarea" class="form-control" style="width:98%;" ></textarea><button class="btn btn-default" style="float:right;margin-right:2em;">SEND</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
-</html>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#textarea').bind('keypress', function(e) {
-		if(e.keyCode==32){
-			//salvar primeiro
-			var valor = $("#textarea").val();
-			var valorQuebrado = valor.split(" ");
-			var tam = valorQuebrado.length;
-			console.log(tam);
-			if(valorQuebrado.length >= 4){
-				var nivel1 = valorQuebrado[valorQuebrado.length-2],
-					nivel2 = valorQuebrado[valorQuebrado.length-3],
-					nivel3 = valorQuebrado[valorQuebrado.length-4],
-					proxima = valorQuebrado[valorQuebrado.length-1]
-				
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 3){
-				var proxima = valorQuebrado[valorQuebrado.length-1],
-					nivel1 = valorQuebrado[valorQuebrado.length-2],
-					nivel2 = valorQuebrado[valorQuebrado.length-3]
-					
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
-				);
-			}
-			else if(valorQuebrado.length == 2){
-				var proxima = valorQuebrado[valorQuebrado.length-1],
-					nivel1 = valorQuebrado[valorQuebrado.length-2]
-										
-				$.post(
-					"ajax/ajaxSalvaCasos.php",
-					{tipo:1, nivel1:nivel1, proxima:proxima},
-					function(resposta){
-						//alert(resposta);
-					}
-				);
-			}
-			
-			
-		}
-	});
-	var cont = 0;
-	$("#nav-opcoes").slideUp(10);
-	$('#menu').click(function() {
-		if(cont % 2 == 0){
-			$("#nav-opcoes").slideDown();
-		}else{
-			$("#nav-opcoes").slideUp();
-		}
-		cont++
-	});
-	
-});
-</script>
-
+<html>
+	<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/octicons/octicons.css">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	
+	<script>
+		/*$(document).ready(function(){
+			$('#textarea').bind('keypress', function(e) {
+				if(e.keyCode==32){
+					var valor = $("#textarea").val();
+					alert(valor);
+				}
+			});
+		});*/
+	</script>
+	
+	</head>
+	
+	<body>
+	
+		<div class="container-fluid">
+		
+			<div class="row" id="topo">
+				<div class="col-lg-12" id="menu-topo">
+					<div class="row" id="content-topo" style="margin-top:1em;">
+						
+						<div class="col-lg-1" id="nav-menu">
+							<div id="icon-click">
+								<button class="btn btn-default btn-lg active" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
+							</div>
+							
+							<div id="nav-opcoes" style="width:40%;">
+								<ul class="">
+									<li class="">Perfil</li>
+									<li class="">Conversas</li>
+									<li class="">Sair</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-11">
+							<div id="avatar">
+								
+									<img class="img" src="img/icon-1.png">      
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">
+									<img class="img" src="img/icon-1.png">								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="chat">
+				<div class="col-lg-12" id="cima-chat">
+					
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaa    aaa aaaassdfaafsdghsgfjkhgfdkjahsgdfjkhagdfkjhagdfkjahffgkasadkhfasdfhagdsfkhjasdgfkadjgfasdkfjghasdfkjasdhgfkadfhgasdkghasdfkjasdhgfkdhgfaksdjfhgadksfhj</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-right">aaa</div>
+					<div class="clear-both"></div>
+					<div class="conversa conversa-left">aaa</div>
+					<div class="clear-both"></div>
+					
+
+				</div>
+			</div>
+			<div class="row" id="texto-area">
+				<div class="col-lg-12" id="baixo-chat">
+					<div class="form-group">
+						<textarea id="textarea" class="form-control" style="width:98%;" ></textarea><button class="btn btn-default" style="float:right;margin-right:2em;">SEND</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#textarea').bind('keypress', function(e) {
+		if(e.keyCode==32){
+			//salvar primeiro
+			var valor = $("#textarea").val();
+			var valorQuebrado = valor.split(" ");
+			var tam = valorQuebrado.length;
+			console.log(tam);
+			if(valorQuebrado.length >= 4){
+				var nivel1 = valorQuebrado[valorQuebrado.length-2],
+					nivel2 = valorQuebrado[valorQuebrado.length-3],
+					nivel3 = valorQuebrado[valorQuebrado.length-4],
+					proxima = valorQuebrado[valorQuebrado.length-1]
+				
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:3, nivel3:nivel3, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
+			}
+			else if(valorQuebrado.length == 3){
+				var proxima = valorQuebrado[valorQuebrado.length-1],
+					nivel1 = valorQuebrado[valorQuebrado.length-2],
+					nivel2 = valorQuebrado[valorQuebrado.length-3]
+					
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:2, nivel2:nivel2, nivel1:nivel1, proxima:proxima}
+				);
+			}
+			else if(valorQuebrado.length == 2){
+				var proxima = valorQuebrado[valorQuebrado.length-1],
+					nivel1 = valorQuebrado[valorQuebrado.length-2]
+										
+				$.post(
+					"ajax/ajaxSalvaCasos.php",
+					{tipo:1, nivel1:nivel1, proxima:proxima},
+					function(resposta){
+						//alert(resposta);
+					}
+				);
+			}
+			
+			
+		}
+	});
+	var cont = 0;
+	$("#nav-opcoes").slideUp(10);
+	$('#menu').click(function() {
+		if(cont % 2 == 0){
+			$("#nav-opcoes").slideDown();
+		}else{
+			$("#nav-opcoes").slideUp();
+		}
+		cont++
+	});
+	
+});
+</script>
+
