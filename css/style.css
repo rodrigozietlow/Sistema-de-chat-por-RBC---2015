@@ -26,6 +26,7 @@ body {
 	}
 #nav-menu`{
 	display:inline;
+	position:absolute;
 }
 #texto-area{	
 	background: -webkit-linear-gradient(left, #F6F6F6 , #D0D0D0); /* For Safari 5.1 to 6.0 */
@@ -109,6 +110,15 @@ body {
 
 
 #chat{	background-image:url(../img/img5.jpg);}
+
+.dropdown-menu>li>a:hover {
+	background-color: #660066 !important; 
+}
+
+
+
+
+
 
 
 

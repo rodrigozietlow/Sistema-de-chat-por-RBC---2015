@@ -43,18 +43,18 @@ $conexao = new MySQL();
 				<div class="col-lg-12" id="menu-topo">
 					<div class="row" id="content-topo" style="margin-top:1em;">
 						
-						<div class="col-lg-1" id="nav-menu">
-							<div id="icon-click">
-								<button class="btn btn-default btn-lg" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
-							</div>
+						<div class="col-lg-1 dropdown" id="nav-menu">
 							
-							<div id="nav-opcoes" style="width:100%;">
-								<ul class="list-group">
-									<li class="list-group-item">Perfil</li>
-									<li class="list-group-item">Conversas</li>
-									<li class="list-group-item">Sair</li>
-								</ul>
-							</div>
+							<button class="btn btn-default btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
+							
+						
+							<ul class="dropdown-menu" aria-labelledby="menu">
+								<li><a>Perfil</a></li>
+								<li><a>Conversas</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a>Sair</a></li>
+							</ul>
+						
 						</div>
 						<div class="col-lg-11">
 							<div id="avatar">
@@ -126,6 +126,8 @@ $(document).ready(function() {
 	$(function () {//inicializar as tooltips - bootstrap
 		$('[data-toggle="tooltip"]').tooltip()
 	});
+	
+	$('.dropdown-toggle').dropdown();
 	
 	setInterval(
 		function(){
