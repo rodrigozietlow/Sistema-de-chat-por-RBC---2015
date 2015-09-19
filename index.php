@@ -48,11 +48,11 @@ $conexao = new MySQL();
 								<button class="btn btn-default btn-lg" id="menu"><span id="list" class="glyphicon glyphicon-cog"></span></button>			
 							</div>
 							
-							<div id="nav-opcoes" style="width:40%;">
-								<ul class="">
-									<li class="">Perfil</li>
-									<li class="">Conversas</li>
-									<li class="">Sair</li>
+							<div id="nav-opcoes" style="width:100%;">
+								<ul class="list-group">
+									<li class="list-group-item">Perfil</li>
+									<li class="list-group-item">Conversas</li>
+									<li class="list-group-item">Sair</li>
 								</ul>
 							</div>
 						</div>
@@ -101,7 +101,7 @@ $conexao = new MySQL();
 					</div>
 				</div>
 			</div>
-			<div class="row" id="chat">
+			<div class="row gradient" id="chat">
 				<div class="col-lg-12" id="cima-chat">	
 					<!-- Aqui tem opções padrões !-->
 					
@@ -113,7 +113,7 @@ $conexao = new MySQL();
 						<input type="hidden" name="idCaraConversa" id="escondido" value="<?=$idLocao?>">
 						<textarea id="textarea" placeholder="Digite sua mensagem aqui!" class="form-control"></textarea>
 						<div class='bloco'>
-							<a class="hvr-wobble-horizontal" id="enviar"><span class="glyphicon glyphicon-arrow-right glyphicon-lg btn-default btn-style" ></span></a>
+							<a class="hvr-wobble-horizontal" id="enviar"><span class="glyphicon glyphicon-arrow-right glyphicon-lg" ></span></a>
 						</div>
 					</div>
 				</div>

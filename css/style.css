@@ -21,11 +21,26 @@ body {
 	margin-right: 1%;
 	margin-top: 0.35%;
 }
-#menu-topo{	background-color:#660066;
+#menu-topo{	
+	background-color:#660066;
 	}
 #nav-menu`{
 	display:inline;
-	}#texto-area{	background-image:url(../img/img5.jpg);	background-repeat:repeat;	border-radius:10px;	border:10px solid #CCC;}.btn-style{	border-radius: 50px !important;	width:50px !important;}
+}
+#texto-area{	
+	background: -webkit-linear-gradient(left, #F6F6F6 , #D0D0D0); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #F6F6F6 , #D0D0D0); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #F6F6F6 , #D0D0D0); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #F6F6F6 , #D0D0D0); /* Standard syntax */
+	border-radius:10px;	
+	border:#CCC;
+   	border-style: ridge;
+}
+.btn-style{
+	border-radius: 50px !important;
+	width:50px !important;
+}
+
 #cima-chat{
 	height:75%;
 	overflow:auto; 
