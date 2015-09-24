@@ -23,19 +23,18 @@ body {
 }
 #menu-topo{	
 	background-color:#660066;
-	}
-#nav-menu`{
-	display:inline;
-	position:absolute;
 }
-#texto-area{	
-	background: -webkit-linear-gradient(left, #F6F6F6 , #D0D0D0); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, #F6F6F6 , #D0D0D0); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #F6F6F6 , #D0D0D0); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #F6F6F6 , #D0D0D0); /* Standard syntax */
-	border-radius:10px;	
-	border:#CCC;
-   	border-style: ridge;
+#nav-menu{
+	display:inline;
+}
+#texto-area{
+	background: repeating-linear-gradient(
+	 -45deg,
+	 #222,
+	 #222 10px,
+	 #333 10px,
+	 #333 20px
+	);
 }
 .btn-style{
 	border-radius: 50px !important;
@@ -43,7 +42,7 @@ body {
 }
 
 #cima-chat{
-	height:75%;
+	height:77.65%;
 	overflow:auto; 
 	overflow-x:hidden;
 	padding-top:10px;
@@ -53,11 +52,51 @@ body {
 	padding-top: 10px;
 	display:table;
 }
+.sugestions{
+	display:none;
+	position:absolute;
+	z-index:999;
+	width:30%;
+	height:120px;
+	color:white;
+	bottom:13%;
+	left:35%;
+	font-size:17px;
+	background-color: rgba(0,0,0,0.75);
+	border-radius:15px;
+}
+.sug-itens-bloco{
+	display:table;
+	text-align:center;
+	width:33.333333%;
+	height:100%;
+	float:left;
+	line-height:normal;
+}
+.sugestions > .sug-itens-bloco:nth-child(-n+2){
+	border-right:solid 2px white;
+}
+.sug-itens-bloco.active{
+	background-color: rgba(15,15,15,0.75);
+}
+.sugestions > .sug-itens-bloco:first-child{
+	border-top-left-radius:15px;
+	border-bottom-left-radius:15px;
+}
+.sugestions > .sug-itens-bloco:last-child{
+	border-top-right-radius:15px;
+	border-bottom-right-radius:15px;
+}
+.sug-item{
+	display:table-cell;
+	vertical-align:middle;
+
+}
 #textarea {
-	width:92%;
+	width:93%;
 	height:8%;
 	float:left;
-	
+	resize:none;
 }
 .bloco {
 	display: table-cell;
@@ -67,10 +106,10 @@ body {
 	padding-left: 5px;
 }
 #enviar {
-	width:100%;
-	height: 40%;
+	width:85%;
+	height: 35%;
 	float: right;
-	color:black;
+	color:white;
 	text-align:center;
 	text-decoration:none;
 }
@@ -108,12 +147,6 @@ body {
 	clear:both;
 }
 
-
-#chat{	background-image:url(../img/img5.jpg);}
-
-.dropdown-menu>li>a:hover {
-	background-color: #660066 !important; 
-}
 
 
 

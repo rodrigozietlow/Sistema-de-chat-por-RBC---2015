@@ -1,5 +1,5 @@
 <meta charset="ISO-8859-1"><?php
-require_once("../MySQL.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Sistema-de-chat-por-RBC---2015/MySQL.class.php");
 
 $tipo = $_POST['tipo'];
 

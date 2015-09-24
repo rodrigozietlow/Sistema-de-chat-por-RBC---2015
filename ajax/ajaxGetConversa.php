@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=iso-8859-1');
-require_once($_SERVER['DOCUMENT_ROOT']."/MySQL.class.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Sistema-de-chat-por-RBC---2015/MySQL.class.php");
 $idUsuario = $_POST['idUsuario'];
 $idOutro = $_POST['idOutro'];
 

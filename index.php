@@ -107,6 +107,25 @@ $conexao = new MySQL();
 					
 				</div>
 			</div>
+			<div class ="sugestions">
+				<div class = "sug-itens-bloco active" data-numero="1">
+					
+					<div class="sug-item">
+						Item 1
+					</div>
+				</div>
+				<div class = "sug-itens-bloco" data-numero="2">
+					<div class="sug-item">
+						Item 2
+					</div>
+				</div>
+				<div class = "sug-itens-bloco" data-numero="3">
+					<div class="sug-item">
+						Item 3
+					</div>
+				</div>
+			
+			</div>
 			<div class="row" id="texto-area">
 				<div class="col-lg-12" id="baixo-chat">
 					<div class="form-group">
@@ -128,14 +147,23 @@ $(document).ready(function() {
 	});
 	
 	$('.dropdown-toggle').dropdown();
-	
+	esconderSugestoes = function(){
+		$('.sugestions').fadeOut('fast', function () {
+		   $('.sugestions').animate({'opacity': 'hide', 'paddingBottom': 0}, 100);
+		});
+	};
+	 mostrarSugestoes = function(){
+		$('.sugestions').fadeIn('fast', function () {
+		   $('.sugestions').animate({'opacity': 'show', 'paddingTop': 0}, 100);
+		});
+	};
 	setInterval(
 		function(){
 		
 			var idOutro = $("#escondido").val(),
 				idUsuario = "<?= $_SESSION['id']; ?>";
 			
-			console.log(idOutro);
+			//console.log(idOutro);
 			$.post(
 				"ajax/ajaxGetConversa.php",
 				{idOutro:idOutro, idUsuario:idUsuario},
@@ -146,20 +174,49 @@ $(document).ready(function() {
 			);
 		}
 	, 2000);
-	
-	
+	var taClicado = false;
+	$('#textarea').bind('keydown', function(e) {
+		if(e.ctrlKey && e.keyCode==32){
+			taClicado = true;
+			e.preventDefault();
+		}
+	});
 	$('#textarea').bind('keyup', function(e) {
-		if(e.keyCode==32){
+		console.log(taClicado);
+		if(e.keyCode == 32 && e.ctrlKey && taClicado){
+			var numeroAtivo = parseInt($(".active").attr("data-numero"));
+			$(".active").removeClass("active");
+			if(numeroAtivo==3){
+				numeroAtivo = 1;
+			}else{
+				numeroAtivo+=1;
+			}
+			console.log(numeroAtivo);
+			$(".sug-itens-bloco[data-numero="+numeroAtivo+"]").addClass("active");
+		}
+		else if(e.keyCode==32){
 			//salvar primeiro
 			var valor = $("#textarea").val();
 			quebraESalva(valor);
+			mostrarSugestoes();
+			taClicado = false;
 		}
+		
 		
 		//=====================================================================//
 			
 			
 		else if(e.keyCode==13){//Quando dá enter e salva a mensagem
 			$("#enviar").trigger("click");
+			esconderSugestoes();
+			taClicado = false;
+		}
+		else if(e.keyCode==17){
+			taClicado = false;
+		}
+		else{
+			taClicado = false;
+			esconderSugestoes();
 		}
 	});
 	
@@ -190,7 +247,7 @@ $(document).ready(function() {
 		var idOutro = $(this).attr("data-id"),
 			idUsuario = '<?= $_SESSION['id']?>';
 		$("#escondido").val(idOutro);
-		console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
+		//console.log("idOutro:"+idOutro+", idUsuario:"+idUsuario);
 		$.post(
 			"ajax/ajaxGetConversa.php",
 			{idOutro:idOutro, idUsuario:idUsuario},
@@ -221,7 +278,7 @@ $(document).ready(function() {
 		valor = $.trim(valor);
 		var valorQuebrado = valor.split(" ");
 		var tam = valorQuebrado.length;
-		console.log(valorQuebrado);
+		//console.log(valorQuebrado);
 		if(valorQuebrado.length >= 4){
 			var nivel1 = valorQuebrado[valorQuebrado.length-2],
 
