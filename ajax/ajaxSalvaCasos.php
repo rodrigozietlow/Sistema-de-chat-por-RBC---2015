@@ -16,7 +16,7 @@ if($tipo == 1){
 		$query = "UPDATE casos SET peso = peso+1 WHERE id=$id";
 	}
 	else{
-		$query = "INSERT INTO casos(nivel1, proxima, peso) VALUES('$nivel1', '$proximo', 1)";
+		$query = "INSERT INTO casos(nivel1, proxima, peso) VALUES('$nivel1', '$proximo', 1)";				$xml= simplexml_load_file("xml_casos.xml");		$caso = $xml->addChild("caso");		$caso->addChild("nivel1",$nivel1);		$caso->addChild("peso",1);		$caso->addChild("proxima",$proximo);		file_put_contents("xml_casos.xml",$xml->asXML());
 	}
 	
 	$conexao->executa($query);
@@ -35,7 +35,7 @@ else if($tipo == 2){
 		$query = "UPDATE casos SET peso = peso+2 WHERE id=$id";
 	}
 	else{
-		$query = "INSERT INTO casos(nivel2, nivel1, proxima, peso) VALUES('$nivel2', '$nivel1', '$proximo', 2)";
+		$query = "INSERT INTO casos(nivel2, nivel1, proxima, peso) VALUES('$nivel2', '$nivel1', '$proximo', 2)";		$xml= simplexml_load_file("xml_casos.xml");		$caso = $xml->addChild("caso");		$caso->addChild("nivel1",$nivel1);		$caso->addChild("nivel2",$nivel2);		$caso->addChild("peso",2);		$caso->addChild("proxima",$proximo);		file_put_contents("xml_casos.xml",$xml->asXML());
 	}
 	
 	$conexao->executa($query);
@@ -55,7 +55,7 @@ else if($tipo == 3){
 		$query = "UPDATE casos SET peso = peso+3 WHERE id=$id";
 	}
 	else{
-		$query = "INSERT INTO casos(nivel3, nivel2, nivel1, proxima, peso) VALUES('$nivel3', '$nivel2', '$nivel1', '$proximo', 3)";
+		$query = "INSERT INTO casos(nivel3, nivel2, nivel1, proxima, peso) VALUES('$nivel3', '$nivel2', '$nivel1', '$proximo', 3)";				$xml= simplexml_load_file("xml_casos.xml");		$caso = $xml->addChild("caso");		$caso->addChild("nivel1",$nivel1);		$caso->addChild("nivel2",$nivel2);		$caso->addChild("nivel3",$nivel3);		$caso->addChild("peso",3);		$caso->addChild("proxima",$proximo);		file_put_contents("xml_casos.xml",$xml->asXML());
 	}
 	
 	$conexao->executa($query);
