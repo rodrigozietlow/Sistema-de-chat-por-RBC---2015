@@ -1,11 +1,11 @@
-<meta charset="ISO-8859-1"><?php
+<?phpheader('Content-Type: text/html; charset=ISO-8859-1');$_POST = array_map('strtolower', $_POST);
 require_once($_SERVER['DOCUMENT_ROOT']."/Sistema-de-chat-por-RBC---2015/MySQL.class.php");
 
 $tipo = $_POST['tipo'];
 
 if($tipo == 1){
-	$nivel1 = ($_POST['nivel1']);
-	$proximo = ($_POST['proxima']);
+	$nivel1 = $_POST['nivel1'];
+	$proximo = $_POST['proxima'];
 	$conexao = new MySQL();
 	
 	$queryVerificacao = "SELECT id FROM casos WHERE nivel3 is NULL AND nivel2 IS NULL AND nivel1='$nivel1' AND proxima = '$proximo'";
@@ -22,9 +22,9 @@ if($tipo == 1){
 	$conexao->executa($query);
 }
 else if($tipo == 2){
-	$nivel2 = ($_POST['nivel2']);
-	$nivel1 = ($_POST['nivel1']);
-	$proximo = ($_POST['proxima']);
+	$nivel2 = $_POST['nivel2'];
+	$nivel1 = $_POST['nivel1'];
+	$proximo = $_POST['proxima'];
 	$conexao = new MySQL();
 	
 	$queryVerificacao = "SELECT id FROM casos WHERE nivel3 is NULL AND nivel1='$nivel1' AND nivel2='$nivel2'  AND proxima = '$proximo'";
@@ -41,10 +41,10 @@ else if($tipo == 2){
 	$conexao->executa($query);
 }
 else if($tipo == 3){
-	$nivel3 = ($_POST['nivel3']);
-	$nivel2 = ($_POST['nivel2']);
-	$nivel1 = ($_POST['nivel1']);
-	$proximo = ($_POST['proxima']);
+	$nivel3 = $_POST['nivel3'];
+	$nivel2 = $_POST['nivel2'];
+	$nivel1 = $_POST['nivel1'];
+	$proximo = $_POST['proxima'];
 	$conexao = new MySQL();
 	
 	$queryVerificacao = "SELECT id FROM casos WHERE nivel3='$nivel3' AND nivel1='$nivel1' AND nivel2='$nivel2' AND proxima = '$proximo'";

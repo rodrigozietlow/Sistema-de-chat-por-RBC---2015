@@ -42,7 +42,7 @@ body {
 }
 
 #cima-chat{
-	height:77.65%;
+	height:75.15%;
 	overflow:auto; 
 	overflow-x:hidden;
 	padding-top:10px;
@@ -90,7 +90,14 @@ body {
 .sug-item{
 	display:table-cell;
 	vertical-align:middle;
-
+	height:100%;
+}
+.item-principal{
+	font-size:28;
+	height:50%;
+}
+.titulo-item{
+	font-size:12;
 }
 #textarea {
 	width:93%;

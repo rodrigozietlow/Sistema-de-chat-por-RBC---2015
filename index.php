@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('Content-Type: text/html; charset=iso-8859-1');
+header('Content-Type: text/html; charset=ISO-8859-1');
 require_once("MySQL.class.php");
 if(!isset($_SESSION['id'])){
 	header("location: login.php");
@@ -103,25 +103,30 @@ $conexao = new MySQL();
 			</div>
 			<div class="row gradient" id="chat">
 				<div class="col-lg-12" id="cima-chat">	
-					<!-- Aqui tem opções padrões !-->
+					<!-- Aqui tem opï¿½ï¿½es padrï¿½es !-->
 					
 				</div>
 			</div>
 			<div class ="sugestions">
 				<div class = "sug-itens-bloco active" data-numero="1">
-					
 					<div class="sug-item">
-						Item 1
+						<span class="titulo-item">Primeira Sugest&atilde;o</span>
+						<div id="item-1" class="item-principal"></div><br>
+						<span class="titulo-item">Peso total: <span id="peso-item-1">1</span></span>
 					</div>
 				</div>
 				<div class = "sug-itens-bloco" data-numero="2">
 					<div class="sug-item">
-						Item 2
+						<span class="titulo-item">Segunda Sugest&atilde;o</span>
+						<div id="item-2" class="item-principal"></div><br>
+						<span class="titulo-item">Peso total: <span id="peso-item-2">1</span></span>
 					</div>
 				</div>
 				<div class = "sug-itens-bloco" data-numero="3">
 					<div class="sug-item">
-						Item 3
+						<span class="titulo-item">Terceira Sugest&atilde;o</span>
+						<div id="item-3" class="item-principal"></div><br>
+						<span class="titulo-item">Peso total: <span id="peso-item-3">1</span></span>
 					</div>
 				</div>
 			
@@ -179,10 +184,15 @@ $(document).ready(function() {
 		if(e.ctrlKey && e.keyCode==32){
 			taClicado = true;
 			e.preventDefault();
+		}else if(e.keyCode==9){
+			e.preventDefault();
+			var numero = $(".active").attr("data-numero");
+			var treco = $("#item-"+numero).html();
+			$("#textarea").val($("#textarea").val()+treco);
 		}
 	});
 	$('#textarea').bind('keyup', function(e) {
-		console.log(taClicado);
+		//console.log(taClicado);
 		if(e.keyCode == 32 && e.ctrlKey && taClicado){
 			var numeroAtivo = parseInt($(".active").attr("data-numero"));
 			$(".active").removeClass("active");
@@ -191,22 +201,78 @@ $(document).ready(function() {
 			}else{
 				numeroAtivo+=1;
 			}
-			console.log(numeroAtivo);
 			$(".sug-itens-bloco[data-numero="+numeroAtivo+"]").addClass("active");
 		}
 		else if(e.keyCode==32){
 			//salvar primeiro
 			var valor = $("#textarea").val();
+			valor = $.trim(valor);
 			quebraESalva(valor);
-			mostrarSugestoes();
+			valor = $.trim(valor);
+			var valorQuebrado = valor.split(" ");
+			var tam = valorQuebrado.length;
+			var data;
+			if(tam>=3){
+				var nivel1 = valorQuebrado[valorQuebrado.length-1],
+
+				nivel2 = valorQuebrado[valorQuebrado.length-2],
+				nivel3 = valorQuebrado[valorQuebrado.length-3];
+				data = {nivel1:nivel1, nivel2:nivel2, nivel3:nivel3, tipo:3};
+			}else if(tam==2){
+				var nivel1 = valorQuebrado[valorQuebrado.length-1],
+				nivel2 = valorQuebrado[valorQuebrado.length-2];
+				data = {nivel1:nivel1, nivel2:nivel2,tipo:2};
+			}else if(tam==1){
+				var nivel1 = valorQuebrado[valorQuebrado.length-1];
+				data = {nivel1:nivel1,tipo:1};
+			}
+			console.log(data);
+			$.post(
+				"ajax/ajaxCarregaSugestoes.php",
+				data,
+				function(resposta){
+					var parcial;
+					console.log(resposta);
+					resposta = resposta.split(";");					
+					resposta = resposta.slice(0, resposta.length-1);
+					for(x=0; x<resposta.length; x+=1){
+						parcial = resposta[x].split(":");
+						resposta[x] = [parcial[0], parcial[1]];
+					}
+					if(resposta.length==1){
+						$("#item-1").html(resposta[0][0]);
+						$("#peso-item-1").html(resposta[0][1]);
+						console.log("tamanho 1");
+						mostrarSugestoes();
+					}else if(resposta.length==2){
+						$("#item-1").html(resposta[0][0]);
+						$("#item-2").html(resposta[1][0]);
+						$("#peso-item-1").html(resposta[0][1]);
+						$("#peso-item-2").html(resposta[1][1]);
+						console.log("tamanho 2");
+						mostrarSugestoes();
+					}
+					else if(resposta.length==3){
+						$("#item-1").html(resposta[0][0]);
+						$("#item-2").html(resposta[1][0]);
+						$("#item-3").html(resposta[2][0]);
+						$("#peso-item-1").html(resposta[0][1]);
+						$("#peso-item-2").html(resposta[1][1]);
+						$("#peso-item-3").html(resposta[2][1]);
+						console.log("tamanho 3");
+						mostrarSugestoes();
+					}
+				}
+			);
 			taClicado = false;
 		}
+		
 		
 		
 		//=====================================================================//
 			
 			
-		else if(e.keyCode==13){//Quando dá enter e salva a mensagem
+		else if(e.keyCode==13){//Quando dï¿½ enter e salva a mensagem
 			$("#enviar").trigger("click");
 			esconderSugestoes();
 			taClicado = false;
